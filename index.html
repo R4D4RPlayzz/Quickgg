@@ -153,16 +153,33 @@
     .card-image {
       width: 100%;
       aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      color: white;
       background-size: cover;
       background-position: center;
-      position: relative;
     }
 
     .card-image::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 45%, rgba(5, 7, 17, 0.85) 100%);
+      background: linear-gradient(180deg, transparent 40%, rgba(5, 7, 17, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    .card-image-label {
+      position: relative;
+      z-index: 1;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+      max-width: 80%;
     }
 
     .card-content {
@@ -232,23 +249,23 @@
     <div class="header">
       <div class="hero">
         <h1>QuickGG Unblocked</h1>
-        <p>Play real unblocked games instantly. Hover over each card to see the title and click to launch the actual game page with an image preview.</p>
+        <p>Play real unblocked games instantly. Hover each card to preview it, then click to open the actual game page in a new tab.</p>
         <div class="search-bar">
           <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
         </div>
       </div>
       <div class="stats">
         <div class="stat">
-          <strong>24</strong>
-          <span>Top unblocked games available</span>
+          <strong>30</strong>
+          <span>Real unblocked game links</span>
         </div>
         <div class="stat">
-          <strong>100%</strong>
-          <span>Clickable real game links</span>
+          <strong>Clickable</strong>
+          <span>Open the game instantly</span>
         </div>
         <div class="stat">
-          <strong>Live</strong>
-          <span>Open games in a new tab</span>
+          <strong>Works offline</strong>
+          <span>Card visuals are local</span>
         </div>
       </div>
     </div>
@@ -258,167 +275,36 @@
 
   <script>
     const games = [
-      {
-        title: 'Happy Wheels',
-        url: 'https://unblockedgames77play.net/happy-wheels/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Happy+Wheels',
-        category: 'Physics',
-        desc: 'Race through insane obstacle courses in this classic ragdoll demolition game.'
-      },
-      {
-        title: 'Tiny Fishing',
-        url: 'https://unblockedgames77play.net/tiny-fishing/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Tiny+Fishing',
-        category: 'Fishing',
-        desc: 'Cast your line and catch the biggest fish in this relaxing arcade experience.'
-      },
-      {
-        title: 'Slope',
-        url: 'https://unblockedgames77play.net/slope/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Slope',
-        category: 'Runner',
-        desc: 'Speed down an endless neon slope while dodging gaps and obstacles.'
-      },
-      {
-        title: 'Run 3',
-        url: 'https://unblockedgames77play.net/run-3/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Run+3',
-        category: 'Platform',
-        desc: 'Explore the tunnels of space with slick one-touch platforming and gravity shifts.'
-      },
-      {
-        title: '1v1.LOL',
-        url: 'https://unblockedgames77play.net/1v1-lol/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=1v1.LOL',
-        category: 'Shooter',
-        desc: 'Build, shoot, and win solo or with friends in this fast-building battle arena.'
-      },
-      {
-        title: 'Krunker.io',
-        url: 'https://krunker.io/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Krunker.io',
-        category: 'FPS',
-        desc: 'Jump into a browser-based shooter with pixel graphics, fast movement, and real matches.'
-      },
-      {
-        title: 'Shell Shockers',
-        url: 'https://shellshock.io/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Shell+Shockers',
-        category: 'Shooter',
-        desc: 'Egg-cellent multiplayer FPS action with quirky weapons and fast reflexes.'
-      },
-      {
-        title: 'Agar.io',
-        url: 'https://agar.io/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Agar.io',
-        category: 'IO',
-        desc: 'Grow your cell, avoid predators, and dominate the agar arena.'
-      },
-      {
-        title: 'Slither.io',
-        url: 'https://slither.io/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Slither.io',
-        category: 'IO',
-        desc: 'Control your snake, eat pellets, and trap other players in this addictive multiplayer game.'
-      },
-      {
-        title: 'Geometry Dash',
-        url: 'https://unblockedgames77play.net/geometry-dash/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Geometry+Dash',
-        category: 'Rhythm',
-        desc: 'Tap through a vibrant rhythm platformer with precise timing and hard levels.'
-      },
-      {
-        title: 'Subway Surfers',
-        url: 'https://unblockedgames77play.net/subway-surfers/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Subway+Surfers',
-        category: 'Runner',
-        desc: 'Dash through subway tracks, dodge trains, and collect power-ups.'
-      },
-      {
-        title: 'Temple Run 2',
-        url: 'https://unblockedgames77play.net/temple-run-2/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Temple+Run+2',
-        category: 'Runner',
-        desc: 'Sprint out of the temple while avoiding traps, chasms, and monsters.'
-      },
-      {
-        title: 'Moto X3M',
-        url: 'https://unblockedgames77play.net/moto-x3m/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Moto+X3M',
-        category: 'Bike',
-        desc: 'Race your motorcycle over extreme ramps, flips, and water hazards.'
-      },
-      {
-        title: 'Tank Trouble',
-        url: 'https://unblockedgames77play.net/tank-trouble/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Tank+Trouble',
-        category: 'Battle',
-        desc: 'Drive a tank and blast opponents around a maze in this fun local multiplayer game.'
-      },
-      {
-        title: 'Bonk.io',
-        url: 'https://unblockedgames77play.net/bonk-io/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Bonk.io',
-        category: 'IO',
-        desc: 'Push other players off the arena in this physics-based multiplayer battler.'
-      },
-      {
-        title: 'Bloons Tower Defense 5',
-        url: 'https://unblockedgames77play.net/bloons-tower-defense-5/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Bloons+TD+5',
-        category: 'Strategy',
-        desc: 'Build monkey towers, upgrade weapons, and stop the bloon invasion.'
-      },
-      {
-        title: 'Paper.io 2',
-        url: 'https://unblockedgames77play.net/paper-io-2/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Paper.io+2',
-        category: 'IO',
-        desc: 'Claim territory, cut off opponents, and become the largest paper slice.'
-      },
-      {
-        title: 'Fireboy and Watergirl',
-        url: 'https://unblockedgames77play.net/fireboy-and-watergirl/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Fireboy+%26+Watergirl',
-        category: 'Puzzle',
-        desc: 'Solve cooperative puzzles across magical temples as a dual character team.'
-      },
-      {
-        title: 'Super Mario 63',
-        url: 'https://unblockedgames77play.net/super-mario-63/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Super+Mario+63',
-        category: 'Adventure',
-        desc: 'Play a fan-made Mario platformer with new power-ups, levels, and secrets.'
-      },
-      {
-        title: 'Happy Wheels 2',
-        url: 'https://unblockedgames77play.net/happy-wheels-2/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Happy+Wheels+2',
-        category: 'Physics',
-        desc: 'More crazy vehicles and brutal obstacle courses in the sequel to Happy Wheels.'
-      },
-      {
-        title: 'Slope Tunnel',
-        url: 'https://unblockedgames77play.net/slope-tunnel/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Slope+Tunnel',
-        category: 'Runner',
-        desc: 'Keep up the speed and avoid falling off the glowing tunnels in this thrilling run.'
-      },
-      {
-        title: 'Geometry Dash Meltdown',
-        url: 'https://unblockedgames77play.net/geometry-dash-meltdown/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Geometry+Dash+Meltdown',
-        category: 'Rhythm',
-        desc: 'Jump and fly through dangerous passages to the beat of energetic music.'
-      },
-      {
-        title: 'Earn to Die 2',
-        url: 'https://unblockedgames77play.net/earn-to-die-2/',
-        image: 'https://via.placeholder.com/640x360/111827/ffffff?text=Earn+to+Die+2',
-        category: 'Action',
-        desc: 'Drive through zombie hordes, upgrade your car, and escape the apocalypse.'
-      }
+      { title: 'Happy Wheels', url: 'https://unblockedgames76.com/happy-wheels/', color: '#ff5c79', category: 'Physics', desc: 'Race through insane obstacle courses in this classic ragdoll demolition game.' },
+      { title: 'Tiny Fishing', url: 'https://unblockedgames76.com/tiny-fishing/', color: '#2dd4bf', category: 'Fishing', desc: 'Cast your line and catch the biggest fish in this relaxing arcade experience.' },
+      { title: 'Slope', url: 'https://unblockedgames76.com/slope/', color: '#818cf8', category: 'Runner', desc: 'Speed down an endless slope while dodging gaps and obstacles.' },
+      { title: 'Run 3', url: 'https://unblockedgames76.com/run-3/', color: '#38bdf8', category: 'Platform', desc: 'Explore tunnels and jump between drifting platforms in this fast-paced runner.' },
+      { title: '1v1.LOL', url: 'https://unblockedgames76.com/1v1-lol/', color: '#f97316', category: 'Shooter', desc: 'Build, shoot, and win solo or with friends in this fast-building battle arena.' },
+      { title: 'Krunker.io', url: 'https://krunker.io/', color: '#a855f7', category: 'FPS', desc: 'Jump into a browser-based shooter with pixel graphics and fast movement.' },
+      { title: 'Shell Shockers', url: 'https://shellshock.io/', color: '#f59e0b', category: 'Shooter', desc: 'Egg-cellent multiplayer FPS action with quirky weapons and fast reflexes.' },
+      { title: 'Agar.io', url: 'https://agar.io/', color: '#22c55e', category: 'IO', desc: 'Grow your cell, avoid predators, and dominate the agar arena.' },
+      { title: 'Slither.io', url: 'https://slither.io/', color: '#0ea5e9', category: 'IO', desc: 'Survive as a snake, eat pellets, and trap other players.' },
+      { title: 'Geometry Dash', url: 'https://unblockedgames76.com/geometry-dash/', color: '#f43f5e', category: 'Rhythm', desc: 'Tap through fast rhythm-based obstacles in this classic platformer.' },
+      { title: 'Subway Surfers', url: 'https://unblockedgames76.com/subway-surfers/', color: '#fb7185', category: 'Runner', desc: 'Dash along subway tracks, dodge trains, and collect coins.' },
+      { title: 'Temple Run 2', url: 'https://unblockedgames76.com/temple-run-2/', color: '#f97316', category: 'Runner', desc: 'Sprint away from the temple while avoiding traps and gaps.' },
+      { title: 'Moto X3M', url: 'https://unblockedgames76.com/moto-x3m/', color: '#6366f1', category: 'Bike', desc: 'Race your motorcycle over extreme ramps, flips, and water hazards.' },
+      { title: 'Tank Trouble', url: 'https://unblockedgames76.com/tank-trouble/', color: '#9333ea', category: 'Battle', desc: 'Drive a tank and blast opponents around a maze in this fun multiplayer game.' },
+      { title: 'Bonk.io', url: 'https://unblockedgames76.com/bonk-io/', color: '#10b981', category: 'IO', desc: 'Push other players off the arena in this physics-based multiplayer battler.' },
+      { title: 'Bloons Tower Defense 5', url: 'https://unblockedgames76.com/bloons-tower-defense-5/', color: '#f59e0b', category: 'Strategy', desc: 'Build monkey towers and stop the bloon invasion.' },
+      { title: 'Paper.io 2', url: 'https://unblockedgames76.com/paper-io-2/', color: '#38bdf8', category: 'IO', desc: 'Claim territory and cut off opponents in this addictive io game.' },
+      { title: 'Fireboy and Watergirl', url: 'https://unblockedgames76.com/fireboy-and-watergirl/', color: '#0ea5e9', category: 'Puzzle', desc: 'Solve cooperative temple puzzles with two characters.' },
+      { title: 'Super Mario 63', url: 'https://unblockedgames76.com/super-mario-63/', color: '#ef4444', category: 'Adventure', desc: 'Play a fan-made Mario platformer with new power-ups and secrets.' },
+      { title: 'Happy Wheels 2', url: 'https://unblockedgames76.com/happy-wheels-2/', color: '#f43f5e', category: 'Physics', desc: 'More insane obstacle courses and ragdoll vehicle wreckage.' },
+      { title: 'Flappy Bird', url: 'https://unblockedgames76.com/flappy-bird/', color: '#fbbf24', category: 'Arcade', desc: 'Tap the bird through pipes in this iconic one-button game.' },
+      { title: 'Stickman Hook', url: 'https://unblockedgames76.com/stickman-hook/', color: '#22c55e', category: 'Action', desc: 'Swing through tricky levels using ropes and momentum.' },
+      { title: 'Vex 6', url: 'https://unblockedgames76.com/vex-6/', color: '#6366f1', category: 'Platform', desc: 'Master dangerous obstacle courses with precise jumps.' },
+      { title: 'Super Smash Flash 2', url: 'https://unblockedgames76.com/super-smash-flash-2/', color: '#8b5cf6', category: 'Fighter', desc: 'Battle iconic characters in a fast-paced fan-made fighter.' },
+      { title: 'Run 2', url: 'https://unblockedgames76.com/run-2/', color: '#e879f9', category: 'Runner', desc: 'Run and glide across floating platforms in this futuristic runner.' },
+      { title: 'Raft Wars', url: 'https://unblockedgames76.com/raft-wars/', color: '#22d3ee', category: 'Shooter', desc: 'Fire cannons and defend your raft from enemy attacks.' },
+      { title: 'Earn to Die 2', url: 'https://unblockedgames76.com/earn-to-die-2/', color: '#f97316', category: 'Action', desc: 'Drive through zombie hordes and upgrade your car to escape.' },
+      { title: 'Basketball Stars', url: 'https://unblockedgames76.com/basketball-stars/', color: '#fb7185', category: 'Sports', desc: 'Compete in basketball duels with flashy shots and power moves.' },
+      { title: 'Taco Bender', url: 'https://unblockedgames76.com/taco-bender/', color: '#facc15', category: 'Arcade', desc: 'Stack tacos and dodge falling ingredients in a food frenzy.' },
+      { title: 'Snake.is', url: 'https://unblockedgames76.com/snake-is/', color: '#1d4ed8', category: 'Classic', desc: 'Eat pellets, grow longer, and outmaneuver opponents in arena battle.' }
     ];
 
     const grid = document.getElementById('gameGrid');
@@ -431,7 +317,9 @@
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       card.innerHTML = `
-        <div class="card-image" style="background-image:url('${game.image}')"></div>
+        <div class="card-image" style="background: linear-gradient(180deg, ${game.color} 0%, rgba(10, 10, 25, 0.9) 85%);">
+          <div class="card-image-label">${game.title}</div>
+        </div>
         <div class="card-content">
           <h2 class="card-title">${game.title}</h2>
           <div class="card-meta">
@@ -465,9 +353,7 @@
         return;
       }
 
-      filtered.forEach(game => {
-        grid.appendChild(buildCard(game));
-      });
+      filtered.forEach(game => grid.appendChild(buildCard(game)));
     }
 
     searchInput.addEventListener('input', () => renderGames(searchInput.value));
