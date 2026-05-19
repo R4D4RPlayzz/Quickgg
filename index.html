@@ -70,6 +70,36 @@
       animation: pulse 16s ease-in-out infinite;
     }
 
+    .planet {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      top: 10%;
+      left: -6%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(141, 94, 255, 0.26), transparent 38%),
+                  radial-gradient(circle at 68% 70%, rgba(255, 160, 255, 0.14), transparent 28%),
+                  radial-gradient(circle at 45% 55%, rgba(255, 255, 255, 0.12), transparent 32%);
+      box-shadow: 0 0 90px rgba(126, 88, 255, 0.22);
+      opacity: 0.92;
+      animation: floatPlanet 18s ease-in-out infinite;
+    }
+
+    .planet::before {
+      content: '';
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      transform: rotate(24deg);
+      opacity: 0.75;
+    }
+
+    @keyframes floatPlanet {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(8px, 14px, 0); }
+    }
+
     @keyframes drift {
       from { transform: translate3d(0, 0, 0); }
       to { transform: translate3d(-220px, 150px, 0); }
@@ -436,16 +466,17 @@
     <div class="stars layer-two"></div>
     <div class="stars layer-three"></div>
     <div class="nebula"></div>
+    <div class="planet"></div>
   </div>
 
   <main class="page">
     <section class="hero">
       <h1>QuickGG Galaxy</h1>
-      <p>Browse over 100 hoverable game cards in a moving starfield. Click any game to enter the unblocked portal and launch the next cosmic challenge.</p>
+      <p>Explore a space-themed galaxy of unblocked games. Hover for details and click any card to open the launch portal for favorites like Happy Wheels, Tiny Fishing, and more.</p>
     </section>
 
     <div class="controls">
-      <span class="badge">100+ Unblocked Games</span>
+      <span class="badge">100+ Unblocked Titles</span>
       <label class="search">
         <span>🔎</span>
         <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
@@ -484,30 +515,27 @@
 
   <script>
     const games = [
-      'Orbit Runner', 'Starlight Siege', 'Nova Navigator', 'Galaxy Quest', 'Astro Drift',
-      'Comet Clash', 'Meteor Mayhem', 'Supernova Sprint', 'Cosmic Breaker', 'Planet Protector',
-      'Lunar Leap', 'Rocket Rally', 'Astro Kart', 'Starfield Sprint', 'Nebula Ninja',
-      'Quantum Rush', 'Void Voyager', 'Solar Siege', 'Orbital Outrun', 'Gravity Grid',
-      'Galactic Golf', 'Starship Shuffle', 'Celestial Circuit', 'Alien Alley', 'Comet Chase',
-      'Space Skater', 'Moonshot Masters', 'Nebula Knights', 'Photon Phantoms', 'Solar Surf',
-      'Asteroid Assault', 'Stellar Slides', 'Meteor Madness', 'Plasma Pop', 'Galaxy Grinder',
-      'Lunar Legends', 'Rocket Rebels', 'Star Strike', 'Orbit Odyssey', 'Black Hole Blitz',
-      'Cosmic Commander', 'Nebula Nudge', 'Photon Fighters', 'Astral Adventure', 'Solar Splash',
-      'Comet Convoy', 'Galaxy Gardens', 'Orbital Ops', 'Orbit Arcade', 'Planet Patrol',
-      'Space Sprint', 'Meteor Marathon', 'Cosmic Craft', 'Nova Nights', 'Starbound Showdown',
-      'Rocket Rampage', 'Lunar Legends II', 'Gravity Galaxy', 'Alien Armada', 'Solar Safari',
-      'Astro Arena', 'Nebula Nebulae', 'Supernova Shuffle', 'Orbital Odyssey', 'Stellar Storm',
-      'Galaxy Gliders', 'Cosmic Crusade', 'Planet Puzzles', 'Meteor Mystery', 'Space Station Siege',
-      'Astro Assault', 'Lunar Loot', 'Nova Nexus', 'Orbit Odyssey II', 'Starlight Sprint',
-      'Galaxy Garden', 'Comet Command', 'Plasma Path', 'Astro Adventure', 'Nebula Run',
-      'Starfall Saga', 'Rocket Rescuers', 'Cosmic Clash', 'Solar Storm', 'Orbital Rush',
-      'Lunar Legends III', 'Space Squad', 'Meteor Mix', 'Galaxy Gauntlet', 'Comet Carnival',
-      'Stellar Surge', 'Nebula Navigators', 'Phoenix Flight', 'Starship Stealth', 'Cosmic Carnival',
-      'Astro Blitz', 'Solar Skies', 'Orbit Origins', 'Galaxy Gear', 'Planet Pursuit',
-      'Meteor Mission', 'Nebula Ninja II', 'Starlight Strategies', 'Rocket Rescue', 'Cosmos Chase',
-      'Gravity Gladiator', 'Lunar Launch', 'Solar Streak', 'Astro Escape', 'Orbit Outlaws',
-      'Galaxy Guards', 'Cosmic Cores', 'Planet Panic', 'Meteor Mayhem II', 'Nebula Nights',
-      'Starlight Squad', 'Rocket Riders', 'Orbit Overdrive', 'Galaxy Glitch', 'Space Symphony'
+      'Happy Wheels', 'Tiny Fishing', 'Slope', 'Run 3', '1v1.LOL',
+      'Krunker.io', 'Shell Shockers', 'Geometry Dash', 'Subway Surfers', 'Temple Run 2',
+      'Moto X3M', 'Drift Hunters', 'Tank Trouble', 'Agar.io', 'Slither.io',
+      'Bonk.io', 'Bloons Tower Defense 5', 'Flip Master', 'Basketball Stars', 'Cookie Clicker',
+      'Paper.io 2', 'Stickman Hook', 'Vex 6', 'Rooftop Snipers', 'Urban Sniper',
+      'Zombie Survival', 'Sports Heads Basketball', 'Super Smash Flash', 'Bad Ice Cream', 'Run 2',
+      'Platform Racing 2', "Papa's Pizzeria", 'Skiing Fred', 'Strike Force Heroes', 'Raze',
+      'Madalin Stunt Cars 2', 'Town of Salem', 'Super Smash Flash 2', 'Earn to Die 2', 'Combat Reloaded',
+      "World's Hardest Game", 'The Impossible Quiz', 'Bankshot Billiards 2', 'Hanger', 'Tanks 2',
+      'Mini Royale', 'Screw the Nut', 'The Last Stand', 'Storm the House', 'Fragger',
+      'Bullet Force', 'Sift Heads', 'Nightpoint', 'Warfare 1917', 'Intruder Combat Training',
+      'Clear Vision', 'Rooftop Sniper 3', 'Parking Fury', 'Fancy Pants Adventure', 'Canabalt',
+      'Age of War', 'Zombie Shooter', 'Sonic 1', 'Super Mario 63', 'Pac Xon',
+      'Minecraft Classic', 'Raft Wars', 'Bloons Super Monkey', 'Bubble Shooter', 'Stick War',
+      'Castle Crashers', 'Fireboy and Watergirl', 'Grow Cube', "Papa's Freezeria", 'Road of the Dead',
+      'Kogama', 'Spaceplan', 'Little Big Snake', 'War Brokers', 'Vector Runner',
+      'Bubble Tanks', 'Zombocalypse', 'Spearrun', 'Moto Maniac', 'Extreme Football',
+      'Desert Bike', 'Drift Boss', 'Duck Life 4', 'Slenderman Must Die', 'N Game',
+      'Line Rider', 'Alien Hominid', 'Super Hot Line Miami', 'Ninjump', 'Tiny Fishing 2',
+      'Worlds Hardest Game 2', 'Super Adventure', 'Stick War 2', 'Snail Bob', 'Bloons Tower Defense 6',
+      'Dragon Ball Z Devolution', 'Fireboy and Watergirl 2', 'Happy Wheels 2', 'Parking Fury 2', 'Tactical Assassin'
     ];
 
     const grid = document.getElementById('gameGrid');
