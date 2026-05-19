@@ -15,12 +15,12 @@ box-sizing:border-box;
 
 body{
 font-family:Arial,sans-serif;
-background:black;
-overflow-x:hidden;
+background:#050816;
 color:white;
+overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* SPACE BACKGROUND */
 
 body::before{
 content:"";
@@ -29,66 +29,42 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background-image:url("https://picsum.photos/1920/1080");
-background-size:cover;
-background-position:center;
-filter:brightness(0.35);
-z-index:-2;
-}
-
-body::after{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
 background:
-radial-gradient(circle at top,#7e22ce55,transparent 40%),
-radial-gradient(circle at bottom,#2563eb55,transparent 40%);
-z-index:-1;
+radial-gradient(circle at top,#6d28d955,transparent 30%),
+radial-gradient(circle at bottom,#2563eb55,transparent 30%),
+black;
+z-index:-2;
 }
 
 /* NAVBAR */
 
 .navbar{
-display:flex;
-justify-content:center;
-align-items:center;
 padding:25px;
-backdrop-filter:blur(10px);
-background:rgba(0,0,0,0.3);
-border-bottom:1px solid rgba(255,255,255,0.1);
-position:sticky;
-top:0;
-}
-
-.logo{
-font-size:48px;
+text-align:center;
+font-size:50px;
 font-weight:900;
 letter-spacing:3px;
-background:linear-gradient(to right,#c084fc,#60a5fa);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-text-shadow:0 0 20px purple;
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+color:#c084fc;
 }
 
 /* HERO */
 
 .hero{
 text-align:center;
-padding:90px 20px;
+padding:80px 20px;
 }
 
 .hero h1{
 font-size:70px;
-margin-bottom:20px;
-text-shadow:0 0 25px purple;
+margin-bottom:15px;
 }
 
 .hero p{
 font-size:24px;
-color:#ddd;
+color:#d1d5db;
 }
 
 /* GAME GRID */
@@ -98,45 +74,43 @@ max-width:1400px;
 margin:auto;
 padding:30px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:30px;
 }
 
 .card{
-background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
 border-radius:25px;
 overflow:hidden;
-cursor:pointer;
 transition:0.3s;
+cursor:pointer;
 backdrop-filter:blur(10px);
 }
 
 .card:hover{
 transform:translateY(-10px) scale(1.03);
 box-shadow:0 0 35px #9333ea;
-border-color:#c084fc;
 }
 
 .card:active{
-transform:scale(0.95);
+transform:scale(0.96);
 }
 
 .card img{
 width:100%;
-height:170px;
+height:180px;
 object-fit:cover;
-transition:0.4s;
+transition:0.3s;
 }
 
 .card:hover img{
 transform:scale(1.08);
 }
 
-.card p{
-padding:15px;
-font-size:24px;
-font-weight:bold;
+.card h2{
+padding:18px;
+font-size:28px;
 text-align:center;
 }
 
@@ -145,7 +119,7 @@ text-align:center;
 .footer{
 text-align:center;
 padding:40px;
-color:#aaa;
+color:#9ca3af;
 }
 
 </style>
@@ -154,54 +128,44 @@ color:#aaa;
 <body>
 
 <div class="navbar">
-<div class="logo">QUICKGG</div>
+QUICKGG
 </div>
 
 <div class="hero">
-<h1>WELCOME TO QUICKGG</h1>
-<p>Play awesome unblocked games at school.</p>
+<h1>PLAY UNBLOCKED GAMES</h1>
+<p>The coolest games for school.</p>
 </div>
 
 <div class="games">
 
 <div class="card">
-<img src="https://picsum.photos/400/300?1">
-<p>Slope</p>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Slope_Run_Game.jpg/320px-Slope_Run_Game.jpg">
+<h2>Slope</h2>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/400/300?2">
-<p>Run 3</p>
+<img src="https://upload.wikimedia.org/wikipedia/en/0/0f/Run_3_cover.jpg">
+<h2>Run 3</h2>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/400/300?3">
-<p>1v1.LOL</p>
+<img src="https://play-lh.googleusercontent.com/z2pE7U4gpS3A4QKDMaMGnq6gjK4o9WFm4R8Q9vD0zUNxRj8M5P0K0s0lQh6hLzQ6tA">
+<h2>1v1.LOL</h2>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/400/300?4">
-<p>Retro Bowl</p>
+<img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Retro_Bowl_cover.jpg">
+<h2>Retro Bowl</h2>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/400/300?5">
-<p>Basketball Stars</p>
+<img src="https://play-lh.googleusercontent.com/1M2M7GxW9jzQp6k0RvrRZtGJPD7W82dManIeZDV4SSQdlqzTeWY5Avzkdxl3pNGdiszK">
+<h2>Basketball Stars</h2>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/400/300?6">
-<p>Drift Hunters</p>
-</div>
-
-<div class="card">
-<img src="https://picsum.photos/400/300?7">
-<p>Cookie Clicker</p>
-</div>
-
-<div class="card">
-<img src="https://picsum.photos/400/300?8">
-<p>Monkey Mart</p>
+<img src="https://play-lh.googleusercontent.com/2zJjMgeSEB1t9I7H5P4xMIOKgHdwNwp0UrEGouGZWlznImPi0tLxe3LjXLp8dkUBaRd3">
+<h2>Drift Hunters</h2>
 </div>
 
 </div>
