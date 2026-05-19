@@ -1,1 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickGG Galaxy Arcade</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #060417;
+      color: #eef2ff;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at top, rgba(92, 43, 255, 0.16), transparent 28%),
+                  radial-gradient(circle at 15% 10%, rgba(0, 212, 255, 0.11), transparent 22%),
+                  #060417;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+                  radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
+                  radial-gradient(circle, rgba(143, 125, 255, 0.45) 1px, transparent 1px);
+      background-size: 4px 4px, 7px 7px, 12px 12px;
+      opacity: 0.75;
+      animation: drift 70s linear infinite;
+    }
+
+    .stars.layer-two {
+      opacity: 0.38;
+      background-size: 6px 6px, 10px 10px, 18px 18px;
+      animation-duration: 110s;
+      transform: scale(0.84);
+    }
+
+    .stars.layer-three {
+      opacity: 0.22;
+      background-size: 9px 9px, 16px 16px, 28px 28px;
+      animation-duration: 160s;
+      transform: scale(0.62);
+    }
+
+    .nebula {
+      position: absolute;
+      inset: -18%;
+      background: radial-gradient(circle at 18% 18%, rgba(121, 72, 255, 0.22), transparent 26%),
+                  radial-gradient(circle at 82% 12%, rgba(0, 241, 255, 0.16), transparent 18%),
+                  radial-gradient(circle at 15% 78%, rgba(255, 83, 214, 0.14), transparent 18%),
+                  radial-gradient(circle at 75% 80%, rgba(252, 184, 63, 0.10), transparent 16%);
+      filter: blur(42px);
+      opacity: 0.92;
+      animation: pulse 16s ease-in-out infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-220px, 150px, 0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.92; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      padding: 3rem 1.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero {
+      max-width: 1080px;
+      text-align: center;
+      padding: 0 0 1rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      line-height: 1;
+      text-shadow: 0 0 40px rgba(147, 94, 255, 0.4);
+    }
+
+    .hero p {
+      margin: 1.25rem auto 0;
+      max-width: 760px;
+      color: rgba(238, 242, 255, 0.82);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .controls {
+      width: min(1080px, 100%);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      color: #e7e7ff;
+      backdrop-filter: blur(16px);
+    }
+
+    .search {
+      flex: 1 1 320px;
+      min-width: 240px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      color: #eef2ff;
+    }
+
+    .search input {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .grid {
+      width: min(1200px, 100%);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      align-content: space-between;
+      min-height: 220px;
+      border-radius: 28px;
+      background: rgba(12, 8, 28, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.18);
+      padding: 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease, background 0.32s ease;
+      color: #f0f0ff;
+      backdrop-filter: blur(18px);
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(132, 102, 255, 0.45);
+      box-shadow: 0 40px 120px rgba(90, 46, 255, 0.22);
+      background: rgba(21, 13, 41, 0.95);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(135, 94, 255, 0.16), transparent 28%),
+                  radial-gradient(circle at right, rgba(0, 255, 240, 0.08), transparent 22%);
+      pointer-events: none;
+    }
+
+    .card-number {
+      font-family: Inter, sans-serif;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0 0.9rem;
+      font-size: 1.35rem;
+      line-height: 1.1;
+    }
+
+    .card p {
+      margin: 0;
+      color: rgba(238, 242, 255, 0.75);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .card .hint {
+      margin-top: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #b7b3ff;
+      font-size: 0.92rem;
+    }
+
+    .modal-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      background: rgba(1, 1, 9, 0.8);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .modal-wrap.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      width: min(900px, 100%);
+      background: rgba(5, 4, 18, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      box-shadow: 0 40px 130px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 0;
+      min-height: 420px;
+    }
+
+    .modal-main {
+      padding: 2rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      letter-spacing: 0.06em;
+    }
+
+    .modal p {
+      margin: 0;
+      color: rgba(235, 239, 255, 0.82);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .modal-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.4rem;
+    }
+
+    .modal-chip {
+      padding: 0.85rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dbe1ff;
+      font-size: 0.92rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      margin-top: 1.35rem;
+    }
+
+    .button {
+      appearance: none;
+      border: none;
+      border-radius: 16px;
+      padding: 0.95rem 1.4rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, #7b5cff, #42d9ff);
+      color: #080610;
+      box-shadow: 0 18px 40px rgba(66, 217, 255, 0.18);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #eef2ff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .panel {
+      position: relative;
+      padding: 2rem;
+      background: linear-gradient(180deg, rgba(23, 12, 50, 0.96), rgba(5, 3, 18, 0.96));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .panel h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9c8cff;
+    }
+
+    .game-window {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at top left, rgba(80, 59, 255, 0.16), transparent 35%),
+                  radial-gradient(circle at 80% 40%, rgba(0, 235, 255, 0.12), transparent 20%),
+                  #0a0817;
+      min-height: 235px;
+      position: relative;
+      color: rgba(235, 239, 255, 0.88);
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .game-window::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .game-window strong {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+    }
+
+    .game-window small {
+      display: block;
+      color: rgba(223, 228, 255, 0.72);
+      font-size: 0.96rem;
+      line-height: 1.8;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: #eef2ff;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    @media (max-width: 980px) {
+      .modal {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        padding-top: 2rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="stars layer-two"></div>
+    <div class="stars layer-three"></div>
+    <div class="nebula"></div>
+  </div>
+
+  <main class="page">
+    <section class="hero">
+      <h1>QuickGG Galaxy</h1>
+      <p>Browse over 100 hoverable game cards in a moving starfield. Click any game to enter the unblocked portal and launch the next cosmic challenge.</p>
+    </section>
+
+    <div class="controls">
+      <span class="badge">100+ Unblocked Games</span>
+      <label class="search">
+        <span>🔎</span>
+        <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
+      </label>
+    </div>
+
+    <section class="grid" id="gameGrid"></section>
+  </main>
+
+  <div class="modal-wrap" id="modalWrap" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" aria-label="Game portal">
+      <button class="modal-close" id="closeModal" aria-label="Close portal">×</button>
+      <div class="modal-main">
+        <h2 id="modalTitle">Galactic Game</h2>
+        <p id="modalDescription">Select a game card to launch the full-screen unblocked game room. This portal is your gateway to fast click-to-play action inside the galaxy.</p>
+        <div class="modal-details">
+          <span class="modal-chip">Unblocked ready</span>
+          <span class="modal-chip">Fast launch</span>
+          <span class="modal-chip">100+ cards</span>
+        </div>
+        <div class="modal-actions">
+          <button class="button button-primary" id="launchButton">Launch Game</button>
+          <button class="button button-secondary" id="closeButton">Back to games</button>
+        </div>
+      </div>
+      <aside class="panel">
+        <h3>Game Room</h3>
+        <div class="game-window" id="gameWindow">
+          <strong id="gameWindowName">Ready to play</strong>
+          <small id="gameWindowHint">Click "Launch Game" after selecting a card.</small>
+        </div>
+        <p style="margin:0; color:rgba(228, 233, 255, 0.78); font-size:0.96rem; line-height:1.7;">The galaxy portal brings the selected adventure into focus. Hover effects reveal game info, and every card opens a dedicated play session.</p>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const games = [
+      'Orbit Runner', 'Starlight Siege', 'Nova Navigator', 'Galaxy Quest', 'Astro Drift',
+      'Comet Clash', 'Meteor Mayhem', 'Supernova Sprint', 'Cosmic Breaker', 'Planet Protector',
+      'Lunar Leap', 'Rocket Rally', 'Astro Kart', 'Starfield Sprint', 'Nebula Ninja',
+      'Quantum Rush', 'Void Voyager', 'Solar Siege', 'Orbital Outrun', 'Gravity Grid',
+      'Galactic Golf', 'Starship Shuffle', 'Celestial Circuit', 'Alien Alley', 'Comet Chase',
+      'Space Skater', 'Moonshot Masters', 'Nebula Knights', 'Photon Phantoms', 'Solar Surf',
+      'Asteroid Assault', 'Stellar Slides', 'Meteor Madness', 'Plasma Pop', 'Galaxy Grinder',
+      'Lunar Legends', 'Rocket Rebels', 'Star Strike', 'Orbit Odyssey', 'Black Hole Blitz',
+      'Cosmic Commander', 'Nebula Nudge', 'Photon Fighters', 'Astral Adventure', 'Solar Splash',
+      'Comet Convoy', 'Galaxy Gardens', 'Orbital Ops', 'Orbit Arcade', 'Planet Patrol',
+      'Space Sprint', 'Meteor Marathon', 'Cosmic Craft', 'Nova Nights', 'Starbound Showdown',
+      'Rocket Rampage', 'Lunar Legends II', 'Gravity Galaxy', 'Alien Armada', 'Solar Safari',
+      'Astro Arena', 'Nebula Nebulae', 'Supernova Shuffle', 'Orbital Odyssey', 'Stellar Storm',
+      'Galaxy Gliders', 'Cosmic Crusade', 'Planet Puzzles', 'Meteor Mystery', 'Space Station Siege',
+      'Astro Assault', 'Lunar Loot', 'Nova Nexus', 'Orbit Odyssey II', 'Starlight Sprint',
+      'Galaxy Garden', 'Comet Command', 'Plasma Path', 'Astro Adventure', 'Nebula Run',
+      'Starfall Saga', 'Rocket Rescuers', 'Cosmic Clash', 'Solar Storm', 'Orbital Rush',
+      'Lunar Legends III', 'Space Squad', 'Meteor Mix', 'Galaxy Gauntlet', 'Comet Carnival',
+      'Stellar Surge', 'Nebula Navigators', 'Phoenix Flight', 'Starship Stealth', 'Cosmic Carnival',
+      'Astro Blitz', 'Solar Skies', 'Orbit Origins', 'Galaxy Gear', 'Planet Pursuit',
+      'Meteor Mission', 'Nebula Ninja II', 'Starlight Strategies', 'Rocket Rescue', 'Cosmos Chase',
+      'Gravity Gladiator', 'Lunar Launch', 'Solar Streak', 'Astro Escape', 'Orbit Outlaws',
+      'Galaxy Guards', 'Cosmic Cores', 'Planet Panic', 'Meteor Mayhem II', 'Nebula Nights',
+      'Starlight Squad', 'Rocket Riders', 'Orbit Overdrive', 'Galaxy Glitch', 'Space Symphony'
+    ];
+
+    const grid = document.getElementById('gameGrid');
+    const modalWrap = document.getElementById('modalWrap');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const gameWindowName = document.getElementById('gameWindowName');
+    const gameWindowHint = document.getElementById('gameWindowHint');
+    const launchButton = document.getElementById('launchButton');
+    const closeButton = document.getElementById('closeButton');
+    const closeModal = document.getElementById('closeModal');
+    const searchInput = document.getElementById('searchInput');
+
+    let currentGame = null;
+
+    function createCard(name, index) {
+      const card = document.createElement('button');
+      card.className = 'card';
+      card.type = 'button';
+      card.innerHTML = `
+        <div class="card-number">GAME ${String(index).padStart(2, '0')}</div>
+        <h3>${name}</h3>
+        <p>Hover to reveal game details, then click to enter the unblocked portal.</p>
+        <span class="hint">Click to play →</span>
+      `;
+
+      card.addEventListener('click', () => openModal(name, index));
+      return card;
+    }
+
+    function populateGames(filter = '') {
+      grid.innerHTML = '';
+      const query = filter.trim().toLowerCase();
+      const filtered = games.filter(name => name.toLowerCase().includes(query));
+      filtered.forEach((game, index) => {
+        grid.appendChild(createCard(game, index + 1));
+      });
+
+      if (!filtered.length) {
+        const empty = document.createElement('div');
+        empty.style.gridColumn = '1 / -1';
+        empty.style.padding = '3rem';
+        empty.style.textAlign = 'center';
+        empty.style.color = 'rgba(234, 234, 255, 0.64)';
+        empty.textContent = 'No games match that search yet. Try another name or clear the search.';
+        grid.appendChild(empty);
+      }
+    }
+
+    function openModal(name, index) {
+      currentGame = { name, index };
+      modalTitle.textContent = name;
+      modalDescription.textContent = `You are about to launch ${name}, game ${index} of over 100 unblocked choices. Use the portal to open your game room and play on any device.`;
+      gameWindowName.textContent = name;
+      gameWindowHint.textContent = 'Ready to enter the game room. Click launch to play.';
+      modalWrap.classList.add('visible');
+      modalWrap.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeGameModal() {
+      modalWrap.classList.remove('visible');
+      modalWrap.setAttribute('aria-hidden', 'true');
+      currentGame = null;
+    }
+
+    function launchGame() {
+      if (!currentGame) return;
+      gameWindowName.textContent = `${currentGame.name} is launching...`;
+      gameWindowHint.textContent = 'This portal is ready for your unblocked game experience.';
+      modalDescription.textContent = `The ${currentGame.name} game room is open. If you want a real unblocked game, this layout is ready to connect to your play server or embed.`;
+      closeButton.textContent = 'Close portal';
+    }
+
+    searchInput.addEventListener('input', () => populateGames(searchInput.value));
+    closeButton.addEventListener('click', closeGameModal);
+    closeModal.addEventListener('click', closeGameModal);
+    launchButton.addEventListener('click', launchGame);
+
+    populateGames();
+  </script>
+</body>
+</html>
