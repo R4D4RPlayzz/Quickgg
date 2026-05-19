@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickGG</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+color:white;
+overflow-x:hidden;
+background:black;
+}
+
+/* Animated Galaxy Background */
+
+body::before{
+content:'';
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url('https://media.tenor.com/2uyENRmiUt0AAAAC/space-stars.gif');
+background-size:cover;
+background-position:center;
+z-index:-2;
+}
+
+body::after{
+content:'';
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+/* Navbar */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.3);
+border-bottom:1px solid rgba(180,0,255,0.4);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-size:42px;
+font-weight:900;
+background:linear-gradient(to right,#c084fc,#9333ea);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+letter-spacing:2px;
+}
+
+.nav-links{
+display:flex;
+gap:30px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#c084fc;
+}
+
+/* Hero */
+
+.hero{
+text-align:center;
+padding:120px 20px 80px;
+}
+
+.hero h1{
+font-size:80px;
+margin-bottom:10px;
+text-shadow:0 0 25px purple;
+}
+
+.hero p{
+font-size:24px;
+color:#ddd;
+}
+
+.play-btn{
+display:inline-block;
+margin-top:30px;
+padding:18px 40px;
+border-radius:50px;
+background:linear-gradient(to right,#9333ea,#c084fc);
+color:white;
+font-size:22px;
+font-weight:bold;
+text-decoration:none;
+transition:0.3s;
+box-shadow:0 0 30px rgba(180,0,255,0.5);
+}
+
+.play-btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 40px purple;
+}
+
+/* Games Section */
+
+.section-title{
+text-align:center;
+font-size:55px;
+margin-top:40px;
+margin-bottom:40px;
+text-shadow:0 0 15px purple;
+}
+
+.games{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:35px;
+padding:40px;
+max-width:1400px;
+margin:auto;
+}
+
+.card{
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(180,0,255,0.4);
+border-radius:25px;
+overflow:hidden;
+backdrop-filter:blur(10px);
+transition:0.35s;
+cursor:pointer;
+position:relative;
+box-shadow:0 0 15px rgba(0,0,0,0.5);
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 0 35px purple;
+}
+
+.card:active{
+transform:scale(0.96);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+transition:0.4s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.card-content{
+padding:20px;
+text-align:center;
+}
+
+.card-content h3{
+margin:0;
+font-size:30px;
+}
+
+.play-small{
+display:inline-block;
+margin-top:15px;
+padding:12px 24px;
+border-radius:40px;
+background:rgba(180,0,255,0.2);
+border:1px solid #c084fc;
+color:white;
+font-weight:bold;
+text-decoration:none;
+transition:0.3s;
+}
+
+.play-small:hover{
+background:#9333ea;
+}
+
+/* Footer */
+
+.footer{
+margin-top:80px;
+padding:40px;
+text-align:center;
+background:rgba(0,0,0,0.4);
+border-top:1px solid rgba(180,0,255,0.3);
+color:#bbb;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+<div class="logo">QUICKGG</div>
+
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#">Games</a>
+<a href="#">Popular</a>
+<a href="#">New</a>
+</div>
+</div>
+
+<!-- Hero -->
+
+<div class="hero">
+<h1>WELCOME TO QUICKGG</h1>
+
+<p>The best place to play unblocked games at school.</p>
+
+<a class="play-btn" href="#">EXPLORE GAMES</a>
+</div>
+
+<!-- Games -->
+
+<h2 class="section-title">POPULAR GAMES</h2>
+
+<div class="games">
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png">
+<div class="card-content">
+<h3>Minecraft</h3>
+<a class="play-small" href="#">PLAY NOW</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://tr.rbxcdn.com/180DAY-cd1a4e2f1f75885a4cd7f01f680acb52/512/512/Image/Webp/noFilter">
+<div class="card-content">
+<h3>Roblox</h3>
+<a class="play-small" href="#">PLAY NOW</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://play-lh.googleusercontent.com/Z9zJ8JQW6HkU6G5OX9N7sT1X6vMHDLecxB2S7R5CV2wE8p8nH3UX0YPDhmPEw24kqw">
+<div class="card-content">
+<h3>Slope</h3>
+<a class="play-small" href="#">PLAY NOW</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://img.gamedistribution.com/8fb92d5bbd9f4d44af3f95bca6c58458-512x512.jpeg">
+<div class="card-content">
+<h3>Run 3</h3>
+<a class="play-small" href="#">PLAY NOW</a>
+</div>
+</div>
+
+</div>
+
+<!-- Footer -->
+
+<div class="footer">
+© 2026 QUICKGG • Free Popular Games
+</div>
+
+</body>
+</html>
