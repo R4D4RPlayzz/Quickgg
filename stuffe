@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>QuickGG</title>
+
   <style>
     body {
       margin: 0;
@@ -29,7 +30,6 @@
     .navbar {
       padding: 20px;
       background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
       border-bottom: 1px solid purple;
     }
 
@@ -62,6 +62,8 @@
       padding: 20px;
       transition: 0.3s;
       cursor: pointer;
+      text-align: center;
+      font-size: 25px;
     }
 
     .card:hover {
@@ -70,6 +72,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <div class="stars"></div>
@@ -80,15 +83,18 @@
 
 <div class="hero">
   <h1>Great Popular Games</h1>
-  <p>Free to play instantly.</p>
+  <p>Free to play instantly at school.</p>
 </div>
 
 <div class="games">
   <div class="card">Minecraft</div>
+  <div class="card">Roblox</div>
   <div class="card">Slope</div>
   <div class="card">Run 3</div>
   <div class="card">1v1.LOL</div>
+  <div class="card">Cookie Clicker</div>
 </div>
 
 </body>
 </html>
+
