@@ -150,6 +150,20 @@
       border-color: rgba(59, 130, 246, 0.45);
     }
 
+    .card:active {
+      transform: translateY(-8px) scale(0.98);
+    }
+
+    @keyframes pulse-click {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .card.clicked {
+      animation: pulse-click 0.3s ease-in-out;
+    }
+
     .card-image {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -266,7 +280,7 @@
       </div>
       <div class="stats">
         <div class="stat">
-          <strong>10</strong>
+          <strong>11</strong>
           <span>Available games</span>
         </div>
         <div class="stat">
@@ -285,16 +299,17 @@
 
   <script>
     const games = [
-      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', color: '#f59e0b', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.', img: 'https://img.itch.zone/aW1nLzExMDM5NzUwLnBuZw==/315x250%23c/qBNw0c.png' },
-      { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', color: '#fbbf24', category: 'Clicker', desc: 'Click cookies and build your empire.', img: 'https://orteil.dashnet.org/cookieclicker/img/stockmarketIcon.png' },
-      { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', color: '#ef4444', category: 'Racing', desc: 'Drive through insane stunt courses.', img: 'https://images.crazygames.com/games/drive-mad/cover-1671451761.png' },
-      { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', color: '#8b5cf6', category: 'Shooter', desc: 'Snipe opponents from rooftops.', img: 'https://images.crazygames.com/games/rooftop-snipers/cover-1672997825.png' },
-      { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', color: '#2dd4bf', category: 'Fishing', desc: 'Cast your line and reel in huge fish.', img: 'https://images.crazygames.com/games/tiny-fishing/cover-1687357600.png' },
-      { title: 'Moto X3M', url: 'https://sites.google.com/view/classroom6x/moto-x3m', color: '#6366f1', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.', img: 'https://images.crazygames.com/games/moto-x3m/cover-1672997886.png' },
-      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', color: '#f97316', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.', img: 'https://images.crazygames.com/games/1v1-lol/cover-1671545934.png' },
-      { title: 'Snow Rider 3D', url: 'https://sites.google.com/view/classroom6x/snow-rider-3d', color: '#0ea5e9', category: 'Racing', desc: 'Ride through snowy mountain slopes.', img: 'https://images.crazygames.com/games/snow-rider-3d/cover-1672997823.png' },
-      { title: 'Subway Surfers', url: 'https://sites.google.com/view/unblockedgames410/subway-surfers', color: '#fb7185', category: 'Runner', desc: 'Dash through trains and collect coins.', img: 'https://images.crazygames.com/games/subway-surfers/cover-1673529481.png' },
-      { title: 'Fruit Merge', url: 'https://www.cbc.ca/kids/games/all/fruit-merge', color: '#ec4899', category: 'Puzzle', desc: 'Merge matching fruits to progress.', img: 'https://kids.cbc.ca/images/games/fruit-merge-tile.jpg' }
+      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', color: '#f59e0b', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.', emoji: '🐚' },
+      { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', color: '#fbbf24', category: 'Clicker', desc: 'Click cookies and build your empire.', emoji: '🍪' },
+      { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', color: '#ef4444', category: 'Racing', desc: 'Drive through insane stunt courses.', emoji: '🚗' },
+      { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', color: '#8b5cf6', category: 'Shooter', desc: 'Snipe opponents from rooftops.', emoji: '🔫' },
+      { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', color: '#2dd4bf', category: 'Fishing', desc: 'Cast your line and reel in huge fish.', emoji: '🎣' },
+      { title: 'Moto X3M', url: 'https://sites.google.com/view/classroom6x/moto-x3m', color: '#6366f1', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.', emoji: '🏍️' },
+      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', color: '#f97316', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.', emoji: '⚔️' },
+      { title: 'Snow Rider 3D', url: 'https://sites.google.com/view/classroom6x/snow-rider-3d', color: '#0ea5e9', category: 'Racing', desc: 'Ride through snowy mountain slopes.', emoji: '🏂' },
+      { title: 'Subway Surfers', url: 'https://sites.google.com/view/unblockedgames410/subway-surfers', color: '#fb7185', category: 'Runner', desc: 'Dash through trains and collect coins.', emoji: '🚊' },
+      { title: 'Fruit Merge', url: 'https://www.cbc.ca/kids/games/all/fruit-merge', color: '#ec4899', category: 'Puzzle', desc: 'Merge matching fruits to progress.', emoji: '🍎' },
+      { title: 'Archer Ragdoll', url: 'https://sites.google.com/view/classroom6x/archer-ragdoll', color: '#d97706', category: 'Action', desc: 'Shoot arrows at ragdoll targets and complete challenges.', emoji: '🏹' }
     ];
 
     const grid = document.getElementById('gameGrid');
@@ -307,8 +322,8 @@
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       card.innerHTML = `
-        <div class="card-image" style="background: url('${game.img}') center/cover, linear-gradient(180deg, ${game.color} 0%, rgba(10, 10, 25, 0.9) 85%);">
-          <div class="card-image-label">${game.title}</div>
+        <div class="card-image" style="background: linear-gradient(180deg, ${game.color} 0%, rgba(10, 10, 25, 0.9) 85%); display: flex; align-items: center; justify-content: center; font-size: 80px;">
+          ${game.emoji}
         </div>
         <div class="card-content">
           <h2 class="card-title">${game.title}</h2>
@@ -321,6 +336,10 @@
           </span>
         </div>
       `;
+      card.addEventListener('click', () => {
+        card.classList.add('clicked');
+        setTimeout(() => card.classList.remove('clicked'), 300);
+      });
       return card;
     }
 
