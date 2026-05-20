@@ -302,15 +302,21 @@
 <body>
   <div class="page">
     <div class="header">
-      <div class="hero">
-        <div class="brand">
-          <img src="images/logo.png" alt="QuickGG logo" />
-        </div>
-        <div class="search-bar">
-          <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
-        </div>
+      <div class="brand">
+        <img src="images/logo.png" alt="QuickGG logo" />
       </div>
+      <div class="search-bar">
+        <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
+      </div>
+    </div>
 
+    <section class="grid" id="gameGrid"></section>
+  </div>
+
+  <script>
+    const games = [
+      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', image: 'images/0d1e0194-e649-47d0-a0d5-719441df832f.jpg', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.' },
+      { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', image: 'images/e03e0420-49b6-4c50-aa28-764d31d1c773.jpg', category: 'Clicker', desc: 'Click cookies and build your empire.' },
       { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', image: 'images/d069fee0-c598-46cf-b53b-4ed0373eb510.jpg', category: 'Racing', desc: 'Drive through insane stunt courses.' },
       { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', image: 'images/b2066b7f-2870-46a8-800e-1ccc1769e4b5.jpg', category: 'Shooter', desc: 'Snipe opponents from rooftops.' },
       { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', image: 'images/3ac6d22e-fb74-4497-aa76-45840a69568f.jpg', category: 'Fishing', desc: 'Cast your line and reel in huge fish.' },
