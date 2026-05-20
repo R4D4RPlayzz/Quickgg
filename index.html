@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuickGG UBG42 Arcade</title>
+  <title>QuickGG Games</title>
   <style>
     :root {
       color-scheme: dark;
@@ -258,8 +258,8 @@
   <div class="page">
     <div class="header">
       <div class="hero">
-        <h1>QuickGG UBG42 Arcade</h1>
-        <p>Explore 42 hand-picked UBG42-style games with clean preview cards. Hover to see each game and click to open the real game page.</p>
+        <h1>QuickGG Games</h1>
+        <p>Explore 42 hand-picked games with clean preview cards. Hover to see each title and click to open the real game page.</p>
         <div class="search-bar">
           <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
         </div>
@@ -267,15 +267,15 @@
       <div class="stats">
         <div class="stat">
           <strong>42</strong>
-          <span>UBG42-inspired games</span>
+          <span>Featured games</span>
         </div>
         <div class="stat">
-          <strong>Clickable</strong>
+          <strong>Instant</strong>
           <span>Open the real game page instantly</span>
         </div>
         <div class="stat">
-          <strong>Local visuals</strong>
-          <span>Card previews load without external image files</span>
+          <strong>Preview cards</strong>
+          <span>See each game with easy-to-read summaries</span>
         </div>
       </div>
     </div>
@@ -348,7 +348,6 @@
       card.rel = 'noopener noreferrer';
       card.innerHTML = `
         <div class="card-image" style="background: linear-gradient(180deg, ${game.color} 0%, rgba(10, 10, 25, 0.9) 85%);">
-          <img class="card-thumb" src="${svgUri}" alt="${game.title} preview" />
           <div class="card-image-label">${game.title}</div>
         </div>
         <div class="card-content">
