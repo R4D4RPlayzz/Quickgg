@@ -358,6 +358,41 @@
       animation: spin 1s linear infinite;
     }
 
+    .overlay .message {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.78);
+      color: #eef2ff;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .overlay .message.open {
+      display: flex;
+    }
+
+    .overlay .message button {
+      padding: 0.9rem 1.3rem;
+      border: none;
+      border-radius: 999px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .overlay .message button:hover {
+      transform: translateY(-2px);
+      background: #0ea5e9;
+    }
+
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
@@ -389,12 +424,10 @@
       <div class="spinner-ring"></div>
       <div>Loading game…</div>
     </div>
-    <iframe id="gameFrame" allowfullscreen allow="fullscreen; autoplay; encrypted-media"></iframe>
-  </div>
-
-  <script>
-    const games = [
-      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', image: 'images/0d1e0194-e649-47d0-a0d5-719441df832f.jpg', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.' },
+    <div class="message" id="overlayMessage" aria-hidden="true">
+      <div>Sorry — this game can’t be embedded here.</div>
+      <button id="fallbackOpen">Open in new tab</button>
+    </div>
       { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', image: 'images/e03e0420-49b6-4c50-aa28-764d31d1c773.jpg', category: 'Clicker', desc: 'Click cookies and build your empire.' },
       { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', image: 'images/d069fee0-c598-46cf-b53b-4ed0373eb510.jpg', category: 'Racing', desc: 'Drive through insane stunt courses.' },
       { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', image: 'images/b2066b7f-2870-46a8-800e-1ccc1769e4b5.jpg', category: 'Shooter', desc: 'Snipe opponents from rooftops.' },
@@ -466,7 +499,11 @@
     const overlay = document.getElementById('gameOverlay');
     const frame = document.getElementById('gameFrame');
     const spinner = document.getElementById('overlaySpinner');
+    const message = document.getElementById('overlayMessage');
     const closeButton = document.getElementById('closeOverlay');
+    const fallbackButton = document.getElementById('fallbackOpen');
+    let fallbackTimer = null;
+    let currentUrl = null;
 
     function setSpinner(open) {
       if (open) {
@@ -478,15 +515,50 @@
       }
     }
 
+    function setMessage(open) {
+      if (open) {
+        message.classList.add('open');
+        message.setAttribute('aria-hidden', 'false');
+      } else {
+        message.classList.remove('open');
+        message.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function resetOverlay() {
+      setSpinner(false);
+      setMessage(false);
+      frame.src = '';
+      currentUrl = null;
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+    }
+
     function launchGame(url) {
+      currentUrl = url;
+      setMessage(false);
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
       setSpinner(true);
       frame.src = url;
 
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+      }
+      fallbackTimer = window.setTimeout(() => {
+        setSpinner(false);
+        setMessage(true);
+      }, 5000);
+
       if (overlay.requestFullscreen) {
         overlay.requestFullscreen().catch(() => {
-          /* fullscreen may be blocked */
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().catch(() => {
+              /* fullscreen request blocked */
+            });
+          }
         });
       }
     }
@@ -506,9 +578,24 @@
 
     frame.addEventListener('load', () => {
       setSpinner(false);
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+    });
+
+    frame.addEventListener('error', () => {
+      setSpinner(false);
+      setMessage(true);
     });
 
     closeButton.addEventListener('click', closeGame);
+    fallbackButton.addEventListener('click', () => {
+      if (currentUrl) {
+        window.open(currentUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
+
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape') closeGame();
     });
