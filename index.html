@@ -298,38 +298,18 @@
   </div>
 
   <script>
-    function getPreviewImage(game) {
-      const color = game.color || '#2d3748';
-      const icon = game.icon || '';
-      const titleLines = game.title.split(' ').slice(0, 3).join(' ');
-      const svg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450">
-          <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="${color}" />
-              <stop offset="100%" stop-color="#0f172a" />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grad)" rx="36" />
-          <text x="50%" y="35%" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="108" fill="#ffffff">${icon}</text>
-          <text x="50%" y="72%" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="52" fill="#ffffff" font-weight="700">${titleLines}</text>
-        </svg>
-      `;
-      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-    }
-
     const games = [
-      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', color: '#f59e0b', icon: '🐚', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.' },
-      { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', color: '#fbbf24', icon: '🍪', category: 'Clicker', desc: 'Click cookies and build your empire.' },
-      { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', color: '#ef4444', icon: '🚗', category: 'Racing', desc: 'Drive through insane stunt courses.' },
-      { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', color: '#8b5cf6', icon: '🎯', category: 'Shooter', desc: 'Snipe opponents from rooftops.' },
-      { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', color: '#2dd4bf', icon: '🎣', category: 'Fishing', desc: 'Cast your line and reel in huge fish.' },
-      { title: 'Moto X3M', url: 'https://sites.google.com/view/classroom6x/moto-x3m', color: '#6366f1', icon: '🏍️', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.' },
-      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', color: '#f97316', icon: '⚔️', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.' },
-      { title: 'Snow Rider 3D', url: 'https://sites.google.com/view/classroom6x/snow-rider-3d', color: '#0ea5e9', icon: '❄️', category: 'Racing', desc: 'Ride through snowy mountain slopes.' },
-      { title: 'Subway Surfers', url: 'https://sites.google.com/view/unblockedgames410/subway-surfers', color: '#fb7185', icon: '🚊', category: 'Runner', desc: 'Dash through trains and collect coins.' },
-      { title: 'Fruit Merge', url: 'https://www.cbc.ca/kids/games/all/fruit-merge', color: '#ec4899', icon: '🍇', category: 'Puzzle', desc: 'Merge matching fruits to progress.' },
-      { title: 'Archer Ragdoll', url: 'https://sites.google.com/view/classroom6x/archer-ragdoll', color: '#d97706', icon: '🏹', category: 'Action', desc: 'Shoot arrows at ragdoll targets and complete challenges.' }
+      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', image: 'images/0d1e0194-e649-47d0-a0d5-719441df832f.jpg', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.' },
+      { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', image: 'images/e03e0420-49b6-4c50-aa28-764d31d1c773.jpg', category: 'Clicker', desc: 'Click cookies and build your empire.' },
+      { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', image: 'images/d069fee0-c598-46cf-b53b-4ed0373eb510.jpg', category: 'Racing', desc: 'Drive through insane stunt courses.' },
+      { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', image: 'images/b2066b7f-2870-46a8-800e-1ccc1769e4b5.jpg', category: 'Shooter', desc: 'Snipe opponents from rooftops.' },
+      { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', image: 'images/3ac6d22e-fb74-4497-aa76-45840a69568f.jpg', category: 'Fishing', desc: 'Cast your line and reel in huge fish.' },
+      { title: 'Moto X3M', url: 'https://sites.google.com/view/classroom6x/moto-x3m', image: 'images/d9e7a556-d13a-4e51-8e86-c76e534bd8df.jpg', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.' },
+      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', image: 'images/9e17897c-3780-497a-b6c2-7e6bec76dba3.jpg', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.' },
+      { title: 'Snow Rider 3D', url: 'https://sites.google.com/view/classroom6x/snow-rider-3d', image: 'images/8f5360c1-db07-440f-abda-369637571a2f.jpg', category: 'Racing', desc: 'Ride through snowy mountain slopes.' },
+      { title: 'Subway Surfers', url: 'https://sites.google.com/view/unblockedgames410/subway-surfers', image: 'images/65069f88-57b1-4974-af07-06942258963e.jpg', category: 'Runner', desc: 'Dash through trains and collect coins.' },
+      { title: 'Fruit Merge', url: 'https://www.cbc.ca/kids/games/all/fruit-merge', image: 'images/d6b6dc11-246b-41c0-ac7a-a3a6732dc603.jpg', category: 'Puzzle', desc: 'Merge matching fruits to progress.' },
+      { title: 'Archer Ragdoll', url: 'https://sites.google.com/view/classroom6x/archer-ragdoll', image: 'images/fa9cf099-82e1-42f4-a0ec-1b065a0d78b0.jpg', category: 'Action', desc: 'Shoot arrows at ragdoll targets and complete challenges.' }
     ];
 
     const grid = document.getElementById('gameGrid');
@@ -341,10 +321,9 @@
       card.href = game.url;
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
-      const preview = getPreviewImage(game);
       card.innerHTML = `
         <div class="card-image">
-          <img class="card-thumb" src="${preview}" alt="${game.title} preview" />
+          <img class="card-thumb" src="${game.image}" alt="${game.title} preview" />
         </div>
         <div class="card-content">
           <h2 class="card-title">${game.title}</h2>
