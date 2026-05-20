@@ -72,19 +72,6 @@
       box-shadow: none;
     }
 
-    .hero {
-      flex: 1 1 480px;
-      min-width: 280px;
-    }
-
-    .search-bar {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
     .search-bar {
       margin-top: 1.5rem;
       display: flex;
@@ -200,17 +187,6 @@
       backdrop-filter: blur(10px);
     }
 
-    .card-image-label {
-      position: relative;
-      z-index: 1;
-      margin: 1rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      line-height: 1.2;
-      color: #f8fbff;
-      text-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    }
-
     .card-content {
       padding: 1.35rem 1.35rem 1.25rem;
       display: flex;
@@ -231,24 +207,6 @@
       font-size: 1.3rem;
       line-height: 1.18;
       letter-spacing: -0.02em;
-    }
-
-    .card-meta {
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .tag {
-      padding: 0.55rem 0.95rem;
-      border-radius: 999px;
-      background: rgba(59, 130, 246, 0.18);
-      color: #dbeafe;
-      font-size: 0.86rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
     }
 
     .card-description {
@@ -325,7 +283,7 @@
       color: #eef2ff;
       font-size: 1.5rem;
       cursor: pointer;
-      z-index: 1;
+      z-index: 2;
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
     }
 
@@ -428,12 +386,18 @@
       <div>Sorry — this game can’t be embedded here.</div>
       <button id="fallbackOpen">Open in new tab</button>
     </div>
+    <iframe id="gameFrame" allowfullscreen allow="fullscreen; autoplay; encrypted-media"></iframe>
+  </div>
+
+  <script>
+    const games = [
+      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', image: 'images/0d1e0194-e649-47d0-a0d5-719441df832f.jpg', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.' },
       { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', image: 'images/e03e0420-49b6-4c50-aa28-764d31d1c773.jpg', category: 'Clicker', desc: 'Click cookies and build your empire.' },
       { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', image: 'images/d069fee0-c598-46cf-b53b-4ed0373eb510.jpg', category: 'Racing', desc: 'Drive through insane stunt courses.' },
       { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', image: 'images/b2066b7f-2870-46a8-800e-1ccc1769e4b5.jpg', category: 'Shooter', desc: 'Snipe opponents from rooftops.' },
       { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', image: 'images/3ac6d22e-fb74-4497-aa76-45840a69568f.jpg', category: 'Fishing', desc: 'Cast your line and reel in huge fish.' },
       { title: 'Moto X3M', url: 'https://sites.google.com/view/classroom6x/moto-x3m', image: 'images/d9e7a556-d13a-4e51-8e86-c76e534bd8df.jpg', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.' },
-      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', image: 'images/9e17897c-3780-497a-b6c2-7e6bec76dba3.jpg', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.' },
+      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', image: 'images/9e17897c-3780-4974-af07-06942258963e.jpg', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.' },
       { title: 'Snow Rider 3D', url: 'https://sites.google.com/view/classroom6x/snow-rider-3d', image: 'images/8f5360c1-db07-440f-abda-369637571a2f.jpg', category: 'Racing', desc: 'Ride through snowy mountain slopes.' },
       { title: 'Subway Surfers', url: 'https://sites.google.com/view/unblockedgames410/subway-surfers', image: 'images/65069f88-57b1-4974-af07-06942258963e.jpg', category: 'Runner', desc: 'Dash through trains and collect coins.' },
       { title: 'Fruit Merge', url: 'https://www.cbc.ca/kids/games/all/fruit-merge', image: 'images/d6b6dc11-246b-41c0-ac7a-a3a6732dc603.jpg', category: 'Puzzle', desc: 'Merge matching fruits to progress.' },
@@ -525,17 +489,6 @@
       }
     }
 
-    function resetOverlay() {
-      setSpinner(false);
-      setMessage(false);
-      frame.src = '';
-      currentUrl = null;
-      if (fallbackTimer) {
-        clearTimeout(fallbackTimer);
-        fallbackTimer = null;
-      }
-    }
-
     function launchGame(url) {
       currentUrl = url;
       setMessage(false);
@@ -556,7 +509,6 @@
         overlay.requestFullscreen().catch(() => {
           if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen().catch(() => {
-              /* fullscreen request blocked */
             });
           }
         });
@@ -567,11 +519,16 @@
       overlay.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
       setSpinner(false);
+      setMessage(false);
       frame.src = '';
+      currentUrl = null;
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
 
       if (document.fullscreenElement) {
         document.exitFullscreen().catch(() => {
-          /* ignore */
         });
       }
     }
