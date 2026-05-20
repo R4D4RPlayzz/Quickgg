@@ -259,23 +259,23 @@
     <div class="header">
       <div class="hero">
         <h1>QuickGG Games</h1>
-        <p>Browse 42 games from one website and open them directly.</p>
+        <p>Play the best unblocked games. Click any game to start playing instantly.</p>
         <div class="search-bar">
           <input id="searchInput" type="search" placeholder="Search games by name" aria-label="Search games" />
         </div>
       </div>
       <div class="stats">
         <div class="stat">
-          <strong>42</strong>
+          <strong>11</strong>
           <span>Available games</span>
         </div>
         <div class="stat">
-          <strong>One site</strong>
-          <span>All links use the classroom center site</span>
+          <strong>Working</strong>
+          <span>All links verified and active</span>
         </div>
         <div class="stat">
-          <strong>Easy access</strong>
-          <span>Tap a game to open the hosted page</span>
+          <strong>Searchable</strong>
+          <span>Find and play your favorite games</span>
         </div>
       </div>
     </div>
@@ -285,48 +285,17 @@
 
   <script>
     const games = [
-      { title: 'Happy Wheels', url: 'https://sites.google.com/classroom.center/view-1/happy-wheels/', color: '#ff5c79', category: 'Physics', desc: 'Crash, flip, and survive through wild obstacle courses.' },
-      { title: 'Tiny Fishing', url: 'https://sites.google.com/classroom.center/view-1/tiny-fishing/', color: '#2dd4bf', category: 'Fishing', desc: 'Cast your line and reel in weirdly huge fish.' },
-      { title: 'Slope', url: 'https://sites.google.com/classroom.center/view-1/slope/', color: '#818cf8', category: 'Runner', desc: 'Race down an endless slope while avoiding gaps.' },
-      { title: 'Run 3', url: 'https://sites.google.com/classroom.center/view-1/run-3/', color: '#38bdf8', category: 'Platform', desc: 'Jump between floating paths in space tunnels.' },
-      { title: '1v1.LOL', url: 'https://sites.google.com/classroom.center/view-1/1v1-lol/', color: '#f97316', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.' },
-      { title: 'Krunker.io', url: 'https://sites.google.com/classroom.center/view-1/krunker-io/', color: '#a855f7', category: 'FPS', desc: 'Fast browser shooter with pixel graphics.' },
-      { title: 'Shell Shockers', url: 'https://sites.google.com/classroom.center/view-1/shell-shockers/', color: '#f59e0b', category: 'Shooter', desc: 'Egg-based combat with crazy weapons.' },
-      { title: 'Agar.io', url: 'https://sites.google.com/classroom.center/view-1/agar-io/', color: '#22c55e', category: 'IO', desc: 'Grow your cell and eat smaller players.' },
-      { title: 'Slither.io', url: 'https://sites.google.com/classroom.center/view-1/slither-io/', color: '#0ea5e9', category: 'IO', desc: 'Outgrow rivals and trap snakes in the arena.' },
-      { title: 'Geometry Dash', url: 'https://sites.google.com/classroom.center/view-1/geometry-dash/', color: '#f43f5e', category: 'Rhythm', desc: 'Tap to dodge sharp obstacles to the beat.' },
-      { title: 'Temple Run 2', url: 'https://sites.google.com/classroom.center/view-1/temple-run-2/', color: '#fb7185', category: 'Runner', desc: 'Sprint away from the temple monsters nonstop.' },
-      { title: 'Moto X3M', url: 'https://sites.google.com/classroom.center/view-1/moto-x3m/', color: '#6366f1', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.' },
-      { title: 'Tank Trouble', url: 'https://sites.google.com/classroom.center/view-1/tank-trouble/', color: '#9333ea', category: 'Battle', desc: 'Drive a tank and blast opponents in a maze.' },
-      { title: 'Bonk.io', url: 'https://sites.google.com/classroom.center/view-1/bonk-io/', color: '#10b981', category: 'IO', desc: 'Bounce opponents off the platform to win.' },
-      { title: 'Bloons TD 5', url: 'https://sites.google.com/classroom.center/view-1/bloons-td-5/', color: '#f59e0b', category: 'Strategy', desc: 'Build towers and stop the bloon rush.' },
-      { title: 'Paper.io 2', url: 'https://sites.google.com/classroom.center/view-1/paper-io-2/', color: '#38bdf8', category: 'IO', desc: 'Claim territory and trap your rivals.' },
-      { title: 'Fireboy & Watergirl', url: 'https://sites.google.com/classroom.center/view-1/fireboy-and-watergirl/', color: '#0ea5e9', category: 'Puzzle', desc: 'Solve temple puzzles with two heroes.' },
-      { title: 'Super Mario 63', url: 'https://sites.google.com/classroom.center/view-1/super-mario-63/', color: '#ef4444', category: 'Adventure', desc: 'Play a fan-made Mario platformer full of secrets.' },
-      { title: 'Happy Wheels 2', url: 'https://sites.google.com/classroom.center/view-1/happy-wheels-2/', color: '#f43f5e', category: 'Physics', desc: 'More crazy levels with new vehicles.' },
-      { title: 'Flappy Bird', url: 'https://sites.google.com/classroom.center/view-1/flappy-bird/', color: '#fbbf24', category: 'Arcade', desc: 'Tap the bird through the pipes and survive.' },
-      { title: 'Stickman Hook', url: 'https://sites.google.com/classroom.center/view-1/stickman-hook/', color: '#22c55e', category: 'Action', desc: 'Swing through levels using timing and rope.' },
-      { title: 'Vex 6', url: 'https://sites.google.com/classroom.center/view-1/vex-6/', color: '#6366f1', category: 'Platform', desc: 'Run, jump, and survive deadly obstacles.' },
-      { title: 'Super Smash Flash 2', url: 'https://sites.google.com/classroom.center/view-1/super-smash-flash-2/', color: '#8b5cf6', category: 'Fighter', desc: 'Fight with iconic characters in a fan-made arena.' },
-      { title: 'Run 2', url: 'https://sites.google.com/classroom.center/view-1/run-2/', color: '#e879f9', category: 'Runner', desc: 'Glide across futuristic floating platforms.' },
-      { title: 'Raft Wars', url: 'https://sites.google.com/classroom.center/view-1/raft-wars/', color: '#22d3ee', category: 'Shooter', desc: 'Fire cannons and defend your raft.' },
-      { title: 'Earn to Die 2', url: 'https://sites.google.com/classroom.center/view-1/earn-to-die-2/', color: '#f97316', category: 'Action', desc: 'Drive through zombies and upgrade your ride.' },
-      { title: 'Basketball Stars', url: 'https://sites.google.com/classroom.center/view-1/basketball-stars/', color: '#fb7185', category: 'Sports', desc: 'Score flashy hoops in a 1v1 basketball duel.' },
-      { title: 'Taco Bender', url: 'https://sites.google.com/classroom.center/view-1/taco-bender/', color: '#facc15', category: 'Arcade', desc: 'Stack tacos while dodging falling ingredients.' },
-      { title: 'Snake.is', url: 'https://sites.google.com/classroom.center/view-1/snake-is/', color: '#1d4ed8', category: 'Classic', desc: 'Grow longer and outmaneuver your opponents.' },
-      { title: 'Subway Surfers', url: 'https://sites.google.com/classroom.center/view-1/subway-surfers/', color: '#fb7185', category: 'Runner', desc: 'Dash through trains and collect coins.' },
-      { title: 'Crossy Road', url: 'https://sites.google.com/classroom.center/view-1/crossy-road/', color: '#f97316', category: 'Arcade', desc: 'Keep crossing roads without getting hit.' },
-      { title: 'Minecraft Classic', url: 'https://sites.google.com/classroom.center/view-1/minecraft-classic/', color: '#22c55e', category: 'Sandbox', desc: 'Build and explore in the web version of Minecraft.' },
-      { title: 'Tetris', url: 'https://sites.google.com/classroom.center/view-1/tetris/', color: '#38bdf8', category: 'Puzzle', desc: 'Stack falling blocks and clear lines.' },
-      { title: 'Pacman', url: 'https://sites.google.com/classroom.center/view-1/pacman/', color: '#f59e0b', category: 'Classic', desc: 'Chomp ghosts in the iconic maze game.' },
-      { title: 'Doodle Jump', url: 'https://sites.google.com/classroom.center/view-1/doodle-jump/', color: '#8b5cf6', category: 'Arcade', desc: 'Jump up platforms and avoid falling.' },
-      { title: 'Helix Jump', url: 'https://sites.google.com/classroom.center/view-1/helix-jump/', color: '#f97316', category: 'Arcade', desc: 'Drop through spiral platforms while avoiding red zones.' },
-      { title: 'Geometry Dash Subzero', url: 'https://sites.google.com/classroom.center/view-1/geometry-dash-subzero/', color: '#0ea5e9', category: 'Rhythm', desc: 'Fast-paced dash levels with icy visuals.' },
-      { title: 'Madalin Stunt Cars 2', url: 'https://sites.google.com/classroom.center/view-1/madalin-stunt-cars-2/', color: '#22d3ee', category: 'Racing', desc: 'Drive sports cars through crazy stunt tracks.' },
-      { title: 'Moto X3M Pool Party', url: 'https://sites.google.com/classroom.center/view-1/moto-x3m-pool-party/', color: '#3b82f6', category: 'Bike', desc: 'Jump across pool-themed motorcycle challenges.' },
-      { title: 'Snakes and Ladders', url: 'https://sites.google.com/classroom.center/view-1/snakes-and-ladders/', color: '#fb7185', category: 'Board', desc: 'Classic board game fun with ladders and snakes.' },
-      { title: 'Draw Here 3', url: 'https://sites.google.com/classroom.center/view-1/draw-here-3/', color: '#34d399', category: 'Puzzle', desc: 'Draw paths and solve mazes with your mouse.' },
-      { title: 'Bubble Shooter', url: 'https://sites.google.com/classroom.center/view-1/bubble-shooter/', color: '#22d3ee', category: 'Puzzle', desc: 'Match bubbles to clear the board and beat the clock.' }
+      { title: 'Jumping Shell', url: 'https://jumpingshellgame.github.io/', color: '#f59e0b', category: 'Arcade', desc: 'Jump to avoid obstacles and survive.', img: 'https://via.placeholder.com/400x300/f59e0b/ffffff?text=Jumping+Shell' },
+      { title: 'Cookie Clicker', url: 'https://sites.google.com/site/unblockedwtf/cookie-clicker', color: '#fbbf24', category: 'Clicker', desc: 'Click cookies and build your empire.', img: 'https://via.placeholder.com/400x300/fbbf24/ffffff?text=Cookie+Clicker' },
+      { title: 'Drive Mad', url: 'https://sites.google.com/view/games-az/drive-mad', color: '#ef4444', category: 'Racing', desc: 'Drive through insane stunt courses.', img: 'https://via.placeholder.com/400x300/ef4444/ffffff?text=Drive+Mad' },
+      { title: 'Rooftop Snipers', url: 'https://sites.google.com/view/classroom6x/rooftop-snipers', color: '#8b5cf6', category: 'Shooter', desc: 'Snipe opponents from rooftops.', img: 'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Rooftop+Snipers' },
+      { title: 'Tiny Fishing', url: 'https://sites.google.com/site/unblockedwtf/tiny-fishing', color: '#2dd4bf', category: 'Fishing', desc: 'Cast your line and reel in huge fish.', img: 'https://via.placeholder.com/400x300/2dd4bf/ffffff?text=Tiny+Fishing' },
+      { title: 'Moto X3M', url: 'https://sites.google.com/view/classroom6x/moto-x3m', color: '#6366f1', category: 'Bike', desc: 'Complete insane stunt tracks without crashing.', img: 'https://via.placeholder.com/400x300/6366f1/ffffff?text=Moto+X3M' },
+      { title: '1v1.LOL', url: 'https://sites.google.com/view/classroom6x/1v1-lol', color: '#f97316', category: 'Shooter', desc: 'Build fast and battle to be the last one standing.', img: 'https://via.placeholder.com/400x300/f97316/ffffff?text=1v1.LOL' },
+      { title: 'Snow Rider 3D', url: 'https://sites.google.com/view/classroom6x/snow-rider-3d', color: '#0ea5e9', category: 'Racing', desc: 'Ride through snowy mountain slopes.', img: 'https://via.placeholder.com/400x300/0ea5e9/ffffff?text=Snow+Rider+3D' },
+      { title: 'Subway Surfers', url: 'https://sites.google.com/view/unblockedgames410/subway-surfers', color: '#fb7185', category: 'Runner', desc: 'Dash through trains and collect coins.', img: 'https://via.placeholder.com/400x300/fb7185/ffffff?text=Subway+Surfers' },
+      { title: 'Fruit Merge', url: 'https://www.cbc.ca/kids/games/all/fruit-merge', color: '#ec4899', category: 'Puzzle', desc: 'Merge matching fruits to progress.', img: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=Fruit+Merge' },
+      { title: 'Flappy Bird', url: 'https://flappybirdonline.gitlab.io/', color: '#fbbf24', category: 'Arcade', desc: 'Tap to fly through pipes and survive.', img: 'https://via.placeholder.com/400x300/fbbf24/ffffff?text=Flappy+Bird' }
     ];
 
     const grid = document.getElementById('gameGrid');
@@ -339,7 +308,7 @@
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       card.innerHTML = `
-        <div class="card-image" style="background: linear-gradient(180deg, ${game.color} 0%, rgba(10, 10, 25, 0.9) 85%);">
+        <div class="card-image" style="background: url('${game.img}') center/cover, linear-gradient(180deg, ${game.color} 0%, rgba(10, 10, 25, 0.9) 85%);">
           <div class="card-image-label">${game.title}</div>
         </div>
         <div class="card-content">
